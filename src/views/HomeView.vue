@@ -1,3 +1,17 @@
-<script setup></script>
+<script setup>
+import SliderView from '@/components/SliderView.vue'
+</script>
 
-<template>Hallo</template>
+<template>
+  <div class="wrapper">
+    <SliderView />
+  </div>
+</template>
+
+<style scoped>
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+</style>
