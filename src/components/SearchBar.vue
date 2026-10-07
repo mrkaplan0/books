@@ -2,14 +2,16 @@
 import { Search } from '@lucide/vue'
 import { ref, watch } from 'vue'
 import CustomSelect from '@/components/CustomSelect.vue'
+import { useBookStore } from '@/stores/bookStore.js'
 
 const searchTypes = [
-  { key: 'products', value: 'Produkte' },
-  { key: 'textbooks', value: 'Lehrwerke' },
+  { key: 'books', value: 'Bücher' },
+  { key: 'isbn', value: 'ISBN' },
   { key: 'helpcenter', value: 'Help Center' },
 ]
 const selectedSearchType = ref(searchTypes[0])
 const searchQuery = ref('')
+const bookStore = useBookStore()
 
 watch(selectedSearchType, (newValue) => {
   console.log('Selected search type changed to:', newValue)
@@ -18,12 +20,22 @@ watch(selectedSearchType, (newValue) => {
 watch(searchQuery, (newValue) => {
   console.log('Search query changed to:', newValue)
 })
+
+const handleSearch = async () => {
+  await bookStore.searchBooks(searchQuery.value)
+  searchQuery.value = '' // Clear the search input after searching
+}
 </script>
 <template>
   <div class="search-area">
     <CustomSelect class="search-type" :list="searchTypes" v-model="selectedSearchType" />
-    <input type="text" placeholder="Bücher durchsuchen..." v-model="searchQuery" />
-    <button><Search /></button>
+    <input
+      type="text"
+      placeholder="Bücher durchsuchen..."
+      v-model="searchQuery"
+      @keypress.enter="handleSearch"
+    />
+    <button @click="handleSearch"><Search /></button>
   </div>
 </template>
 
