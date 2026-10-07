@@ -16,23 +16,28 @@ const SwiperPagination = Pagination
 const SwiperNavigation = Navigation
 const SwiperEffectCreative = EffectCreative
 
+defineProps({
+  slides: {
+    type: Array,
+    default: () => [
+      {
+        title: 'Nature Odyssey',
+        subtitle: 'Explore the Wild',
+        description: 'Discover breathtaking landscapes and untouched wilderness.',
+        bgImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920',
+        foregroundImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800',
+      },
+      {
+        title: 'Urban Architecture',
+        subtitle: 'Modern Living',
+        description: 'Experience the pulse of modern cityscapes and design.',
+        bgImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920',
+        foregroundImage: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800',
+      },
+    ],
+  },
+})
 // Sample slide data
-const slides = ref([
-  {
-    title: 'Nature Odyssey',
-    subtitle: 'Explore the Wild',
-    description: 'Discover breathtaking landscapes and untouched wilderness.',
-    bgImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920',
-    foregroundImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800',
-  },
-  {
-    title: 'Urban Architecture',
-    subtitle: 'Modern Living',
-    description: 'Experience the pulse of modern cityscapes and design.',
-    bgImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920',
-    foregroundImage: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800',
-  },
-])
 
 // Refs to capture DOM elements for GSAP animations
 const textRefs = ref([])
@@ -100,7 +105,7 @@ onMounted(() => {
       }"
       :pagination="{ clickable: true }"
       :navigation="true"
-      :autoplay="{ delay: 5000, disableOnInteraction: false }"
+      :autoplay="{ delay: 6000, disableOnInteraction: false }"
       class="mySwiper"
       @slideChangeTransitionStart="onSlideChange"
     >
@@ -157,7 +162,7 @@ onMounted(() => {
   height: 100%;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.6); /* Darken background for better text contrast */
+  filter: brightness(0.4); /* Darken background for better text contrast */
   z-index: 1;
 }
 
