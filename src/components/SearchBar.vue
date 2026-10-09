@@ -7,7 +7,6 @@ import { useBookStore } from '@/stores/bookStore.js'
 const searchTypes = [
   { key: 'books', value: 'Bücher' },
   { key: 'isbn', value: 'ISBN' },
-  { key: 'helpcenter', value: 'Help Center' },
 ]
 const selectedSearchType = ref(searchTypes[0])
 const searchQuery = ref('')

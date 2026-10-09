@@ -133,9 +133,10 @@ onMounted(() => {
 
 <style scoped>
 .slider-container {
-  width: 100%;
+  width: 70%;
   height: 600px;
   position: relative;
+  margin: 1rem auto;
   overflow: hidden;
 }
 
@@ -240,6 +241,7 @@ onMounted(() => {
   .slider-container,
   .mySwiper {
     height: auto;
+    width: 100%;
   }
 
   .mySwiper :deep(.swiper-wrapper) {

@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 import SearchBar from '@/components/SearchBar.vue'
 import { Book, ShoppingCart, User, Search, X } from '@lucide/vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import LogoText from '@/components/LogoText.vue'
 
 const showSearchBar = ref(false)
 const windowWidth = ref(window.innerWidth)
@@ -26,7 +27,7 @@ onUnmounted(() => {
 
 <template>
   <header>
-    <h1>Bücherei</h1>
+    <LogoText />
     <Transition name="fade" mode="out-in">
       <div v-if="!isMobile || (isMobile && showSearchBar)" class="search-bar-item">
         <SearchBar />

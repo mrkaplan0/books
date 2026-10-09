@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Stack+Sans+Text:wght@200..700&display=swap');
+
 #app {
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
   box-sizing: border-box;
+}
+
+.great-vibes-regular {
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @media (hover: hover) {
