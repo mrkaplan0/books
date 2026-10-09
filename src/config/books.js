@@ -5,7 +5,6 @@ export const booklist = [
   'k1ziAgAAQBAJ',
   '_Sbju4F0AVAC',
   'bSinCgAAQBAJ',
-
   'os3jEQAAQBAJ',
   'BPrNEQAAQBAJ',
 ]
