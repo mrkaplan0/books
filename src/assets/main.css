@@ -13,9 +13,22 @@
   font-style: normal;
 }
 
+.blue {
+  background-color: #0056b3;
+  color: #fff;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
+  }
+  button:hover {
+    background-color: #0162ca98;
+    color: #fff;
+  }
+
+  button:disabled:hover {
+    background-color: pink;
   }
 }
 

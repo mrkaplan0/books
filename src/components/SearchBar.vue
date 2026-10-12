@@ -66,10 +66,6 @@ const handleSearch = async () => {
   cursor: pointer;
   text-align: center;
 }
-.search-area button:hover {
-  background-color: #0056b3;
-  color: #fff;
-}
 
 .search-type {
   border-radius: 20px 0 0 20px;

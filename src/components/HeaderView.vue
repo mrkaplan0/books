@@ -4,7 +4,10 @@ import SearchBar from '@/components/SearchBar.vue'
 import { Book, ShoppingCart, User, Search, X } from '@lucide/vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import LogoText from '@/components/LogoText.vue'
+import { useShoppingCartStore } from '@/stores/shoppingCartStore'
 
+const shoppingCartStore = useShoppingCartStore()
+const cartCount = computed(() => shoppingCartStore.items.length)
 const showSearchBar = ref(false)
 const windowWidth = ref(window.innerWidth)
 const isMobile = computed(() => windowWidth.value < 768)
@@ -52,7 +55,13 @@ onUnmounted(() => {
         </li>
         <li v-if="!isMobile || (isMobile && !showSearchBar)">
           <RouterLink to="/cart"
-            ><div class="nav-item"><ShoppingCart /> <span>Warenkorb</span></div>
+            ><div class="nav-item">
+              <div class="badge-wrapper">
+                <ShoppingCart />
+                <span v-if="cartCount > 0" class="badge">{{ cartCount }}</span>
+              </div>
+              <span>Warenkorb</span>
+            </div>
           </RouterLink>
         </li>
         <li v-if="!isMobile || (isMobile && !showSearchBar)">
@@ -113,12 +122,35 @@ nav a.router-link-exact-active {
   opacity: 0;
 }
 
+.badge-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0.1rem 0.1rem;
+  border-radius: 999px;
+  background-color: #0056b3;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   header {
     flex-direction: column;
     padding: 0.5rem;
   }
-  nav span {
+  .nav-item > span {
     display: none;
   }
 

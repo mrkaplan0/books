@@ -22,32 +22,15 @@ watch(
 
 const slides = computed(() => {
   return books.value.map((book) => ({
+    id: book.id,
     title: book.volumeInfo.title,
     subtitle: book.volumeInfo.authors?.join(', ') || 'Unknown Author',
-    description: formatDescription(book.volumeInfo.description) || 'No description available.',
+    description: book.volumeInfo.description || 'No description available.',
     bgImage: book.volumeInfo.imageLinks?.extraLarge || book.volumeInfo.imageLinks?.thumbnail || '',
     foregroundImage:
       book.volumeInfo.imageLinks?.large || book.volumeInfo.imageLinks?.smallThumbnail || '',
   }))
 })
-
-function formatDescription(description) {
-  if (!description) return ''
-
-  const doc = new DOMParser().parseFromString(description, 'text/html')
-
-  doc.querySelectorAll('script, style').forEach((el) => el.remove())
-  doc.querySelectorAll('br').forEach((el) => el.replaceWith(' '))
-  doc.querySelectorAll('p, div, li').forEach((el) => el.append(' '))
-
-  const text = (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim()
-
-  const sentences = new Intl.Segmenter('tr', {
-    granularity: 'sentence',
-  }).segment(text)
-
-  return sentences[Symbol.iterator]().next().value?.segment.trim() ?? ''
-}
 </script>
 
 <template>
@@ -55,7 +38,7 @@ function formatDescription(description) {
     <SliderView :slides="slides" />
     <p v-if="bookStore.loading" role="status">Yükleniyor...</p>
     <p v-else-if="bookStore.error" role="alert">{{ bookStore.error }}</p>
-    <p v-else-if="!books.length">API bu raf için kitap döndürmedi.</p>
+    <p v-else-if="!books.length">Es gibt leider kein Buch.</p>
 
     <div class="book-list">
       <div v-for="book in books" :key="book.id" class="book-item">

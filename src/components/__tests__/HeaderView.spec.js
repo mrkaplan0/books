@@ -3,6 +3,7 @@ import { mount, RouterLinkStub } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import HeaderView from '../HeaderView.vue'
 import SearchBar from '../SearchBar.vue'
+import { createPinia } from 'pinia'
 
 const originalWidth = window.innerWidth
 const wrappers = []
@@ -10,7 +11,11 @@ const wrappers = []
 function renderHeader(width) {
   window.innerWidth = width
   const wrapper = mount(HeaderView, {
-    global: { stubs: { RouterLink: RouterLinkStub } },
+    global: {
+      stubs: { RouterLink: RouterLinkStub },
+
+      plugins: [createPinia()],
+    },
   })
   wrappers.push(wrapper)
   return wrapper
@@ -71,4 +76,3 @@ describe('HeaderView', () => {
     expect(removeListener).toHaveBeenCalledWith('resize', resizeCall[1])
   })
 })
-

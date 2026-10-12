@@ -8,6 +8,7 @@ export const useBookStore = defineStore('book', {
     loading: false,
     error: null,
   }),
+
   actions: {
     async searchBooks(query, searchTerms = '', filter = '') {
       {
@@ -26,6 +27,13 @@ export const useBookStore = defineStore('book', {
       }
     },
     async getBookById(bookId) {
+      if (this.books.length > 0) {
+        const book = this.books.find((element) => element.id === bookId)
+        if (book) {
+          console.log(book)
+          return book
+        }
+      }
       this.loading = true
       this.error = null
       try {
