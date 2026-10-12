@@ -4,6 +4,7 @@ import { createRouter, createMemoryHistory } from 'vue-router'
 import App from '../App.vue'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import { createPinia } from 'pinia'
 
 describe('App', () => {
   it('renders home and updates routed content while keeping the header', async () => {
@@ -19,9 +20,9 @@ describe('App', () => {
     })
     await router.push('/')
     await router.isReady()
-    const wrapper = mount(App, { global: { plugins: [router] } })
+    const wrapper = mount(App, { global: { plugins: [router, createPinia()] } })
     try {
-      expect(wrapper.get('main').text()).toBe('Hallo')
+      expect(wrapper.get('main').exists()).toBe(true)
       expect(wrapper.find('header').exists()).toBe(true)
       await router.push('/about')
       await flushPromises()

@@ -3,6 +3,8 @@ import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination, Navigation, EffectCreative } from 'swiper/modules'
 import gsap from 'gsap'
+import { useRouter } from 'vue-router'
+import { textShortener } from '@/utils/textShortener'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -21,6 +23,7 @@ defineProps({
     type: Array,
     default: () => [
       {
+        id: '1',
         title: 'Nature Odyssey',
         subtitle: 'Explore the Wild',
         description: 'Discover breathtaking landscapes and untouched wilderness.',
@@ -28,6 +31,7 @@ defineProps({
         foregroundImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800',
       },
       {
+        id: '2',
         title: 'Urban Architecture',
         subtitle: 'Modern Living',
         description: 'Experience the pulse of modern cityscapes and design.',
@@ -42,7 +46,7 @@ defineProps({
 // Refs to capture DOM elements for GSAP animations
 const textRefs = ref([])
 const imageRefs = ref([])
-
+const router = useRouter()
 // Trigger entrance animations when slide changes
 const onSlideChange = (swiper) => {
   const activeIndex = swiper.activeIndex
@@ -91,6 +95,10 @@ onMounted(() => {
     )
   }
 })
+
+const goToDetail = (bookId) => {
+  router.push({ name: 'book-detail', params: { id: bookId } })
+}
 </script>
 
 <template>
@@ -109,7 +117,7 @@ onMounted(() => {
       class="mySwiper"
       @slideChangeTransitionStart="onSlideChange"
     >
-      <swiper-slide v-for="(slide, index) in slides" :key="index">
+      <swiper-slide v-for="(slide, index) in slides" :key="index" @click="goToDetail(slide.id)">
         <!-- Background Layer with independent animation -->
         <div class="slide-bg" :style="{ backgroundImage: `url(${slide.bgImage})` }"></div>
 
@@ -118,7 +126,7 @@ onMounted(() => {
           <div class="text-wrapper" ref="textRefs">
             <span class="slide-subtitle">{{ slide.subtitle }}</span>
             <h1 class="slide-title">{{ slide.title }}</h1>
-            <p class="slide-desc">{{ slide.description }}</p>
+            <p class="slide-desc" v-html="textShortener(slide.description)"></p>
           </div>
 
           <!-- Image Layer (e.g., opposite side) -->
