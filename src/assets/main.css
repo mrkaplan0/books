@@ -18,6 +18,14 @@
   color: #fff;
 }
 
+button {
+  height: 40px;
+  border: 1px solid rgba(128, 128, 128, 0.315);
+  color: #0056b3;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
