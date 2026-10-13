@@ -102,8 +102,6 @@ function addBookToShoppingCart() {
       <div class="description" v-html="book.volumeInfo.description"></div>
     </div>
   </section>
-
-  Detail {{ shoppingCartStore.items }}
 </template>
 <style>
 .img-container {
@@ -149,13 +147,8 @@ h2,
 }
 
 .add-button {
-  height: 40px;
-  width: 200px;
-  border: 1px solid rgba(128, 128, 128, 0.315);
-  color: #0056b3;
-  border-radius: 20px;
-  cursor: pointer;
   margin-right: 4rem;
+  width: 200px;
 }
 
 .add-button div {

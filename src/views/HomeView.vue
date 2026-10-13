@@ -72,7 +72,6 @@ const slides = computed(() => {
   border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 8px;
-  width: calc(33.333% - 1rem);
-  box-sizing: border-box;
+  width: 300px;
 }
 </style>
