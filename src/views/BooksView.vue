@@ -12,13 +12,13 @@ onMounted(async () => {
 })
 </script>
 <template>
-  <div class="wrapper">
+  <section class="wrapper">
     <h1>Bücher</h1>
 
     <div class="book-list">
       <BookCard v-for="book in books" :key="book.id" :book="book" />
     </div>
-  </div>
+  </section>
 </template>
 <style scoped>
 .wrapper {
