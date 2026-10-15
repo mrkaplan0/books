@@ -3,15 +3,29 @@ import { formatLangCode } from '@/utils/formatLangCode'
 import { textShortener } from '@/utils/textShortener'
 import { formatDate } from '@/utils/formatDate'
 import { useRouter } from 'vue-router'
+import { ShoppingCartPlus, Bookmark } from '@lucide/vue'
+import { useShoppingCartStore } from '@/stores/shoppingCartStore'
+import { computed } from 'vue'
+
+const shoppingCartStore = useShoppingCartStore()
 
 const router = useRouter()
 
 const props = defineProps({
   book: Object,
 })
-
+const isBookAdded = computed(() => {
+  return props.book && shoppingCartStore.items?.find((el) => el.id === props.book.id)
+})
 const goToDetail = (bookId) => {
   router.push({ name: 'book-detail', params: { id: bookId } })
+}
+function addBookToShoppingCart() {
+  if (isBookAdded.value) {
+    shoppingCartStore.removeBookFromCart(props.book)
+  } else {
+    shoppingCartStore.addBookToCart(props.book)
+  }
 }
 </script>
 <template>
@@ -30,13 +44,25 @@ const goToDetail = (bookId) => {
     </div>
     <!-- Short Details That Appears on Hover -->
     <div class="book-details">
-      <p class="detail-text" v-html="textShortener(props.book.volumeInfo.description)"></p>
-      <div class="book-meta">
-        <span>Pages: {{ props.book.volumeInfo.pageCount || 'N/A' }}</span>
-        <span>Published: {{ formatDate(props.book.volumeInfo.publishedDate) }}</span>
+      <div>
+        <p class="detail-text" v-html="textShortener(props.book.volumeInfo.description)"></p>
+        <div class="book-meta">
+          <span>Pages: {{ props.book.volumeInfo.pageCount || 'N/A' }}</span>
+          <span>Published: {{ formatDate(props.book.volumeInfo.publishedDate) }}</span>
+        </div>
       </div>
-
-      <button class="go-detail-button" @click="goToDetail(props.book.id)">Zur Detail</button>
+      <div class="actions">
+        <button @click="goToDetail(props.book.id)">Zur Detail</button>
+        <button
+          @click="addBookToShoppingCart"
+          :disabled="
+            !props.book.accessInfo.epub.isAvailable && !props.book.accessInfo.pdf.isAvailable
+          "
+        >
+          <div v-if="!isBookAdded"><ShoppingCartPlus size="18" /></div>
+          <div v-else><Bookmark size="18" fill="#0056b3" /></div>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -126,8 +152,14 @@ const goToDetail = (bookId) => {
   color: #0056b3;
 }
 
-.go-detail-button {
-  width: 50%;
+.actions {
+  display: flex;
+}
+.actions button {
+  align-items: center;
+  justify-content: center;
+  width: 40%;
   margin: auto;
+  padding-top: 4px;
 }
 </style>
