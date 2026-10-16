@@ -17,8 +17,7 @@ export const useBookStore = defineStore('book', {
         try {
           const response = await BookService.searchBooks(query, searchTerms, filter)
           console.log('Fetched books from BookService:', response) // Log the fetched books for debugging
-          this.books = response
-          return this.books
+          return response
         } catch (error) {
           this.error = error.message || 'An error occurred while fetching books.'
         } finally {
