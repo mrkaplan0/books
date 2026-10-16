@@ -48,7 +48,7 @@ function addBookToShoppingCart() {
 <template>
   <BookPlaceholder v-if="loading" />
 
-  <section v-if="book?.volumeInfo">
+  <section class="wrapper" v-if="book?.volumeInfo">
     <div class="img-container">
       <img
         class="thumbnail"
@@ -104,6 +104,11 @@ function addBookToShoppingCart() {
   </section>
 </template>
 <style>
+.wrapper {
+  width: 90%;
+  min-height: 70vh;
+  margin: auto;
+}
 .img-container {
   width: 365px;
   height: 400px;
@@ -118,7 +123,6 @@ h2,
 
 .thumbnail {
   width: 90%;
-  padding-left: 18px;
   height: 400px;
 }
 

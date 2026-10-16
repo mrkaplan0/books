@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import App from '../App.vue'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/home/HomeView.vue/index.js'
 import AboutView from '../views/AboutView.vue'
 import { createPinia } from 'pinia'
 

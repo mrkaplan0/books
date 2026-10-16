@@ -65,8 +65,8 @@ onUnmounted(() => {
           </RouterLink>
         </li>
         <li v-if="!isMobile || (isMobile && !showSearchBar)">
-          <RouterLink to="/profile"
-            ><div class="nav-item"><User /> <span>Mein Platz</span></div></RouterLink
+          <RouterLink to="/about"
+            ><div class="nav-item"><User /> <span>Über Projekt</span></div></RouterLink
           >
         </li>
       </ul>
