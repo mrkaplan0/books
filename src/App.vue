@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import HeaderView from '@/components/HeaderView.vue'
 import FooterView from './components/FooterView.vue'
+import SearchResultsPopup from '@/components/SearchResultsPopup.vue'
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import FooterView from './components/FooterView.vue'
     <RouterView />
   </main>
   <FooterView />
+  <SearchResultsPopup />
 </template>
 
 <style scoped>

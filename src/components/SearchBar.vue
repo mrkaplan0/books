@@ -1,8 +1,8 @@
 <script setup>
 import { Search } from '@lucide/vue'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import CustomSelect from '@/components/CustomSelect.vue'
-import { useBookStore } from '@/stores/bookStore.js'
+import { useSearchStore } from '@/stores/searchStore'
 
 const searchTypes = [
   { key: 'books', value: 'Bücher' },
@@ -10,19 +10,10 @@ const searchTypes = [
 ]
 const selectedSearchType = ref(searchTypes[0])
 const searchQuery = ref('')
-const bookStore = useBookStore()
-
-watch(selectedSearchType, (newValue) => {
-  console.log('Selected search type changed to:', newValue)
-})
-
-watch(searchQuery, (newValue) => {
-  console.log('Search query changed to:', newValue)
-})
+const searchStore = useSearchStore()
 
 const handleSearch = async () => {
-  await bookStore.searchBooks(searchQuery.value)
-  searchQuery.value = '' // Clear the search input after searching
+  await searchStore.search(searchQuery.value, selectedSearchType.value.key)
 }
 </script>
 <template>
@@ -32,10 +23,12 @@ const handleSearch = async () => {
       type="text"
       placeholder="Bücher durchsuchen..."
       v-model="searchQuery"
-      @keypress.enter="handleSearch"
+      aria-label="Bücher durchsuchen"
+      @keydown.enter.prevent="handleSearch"
     />
-    <button @click="handleSearch"><Search /></button>
+    <button aria-label="Suchen" :disabled="!searchQuery.trim() || searchStore.loading" @click="handleSearch"><Search /></button>
   </div>
+
 </template>
 
 <style scoped>
