@@ -1,15 +1,27 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="wrapper">
+    <h1>Über das Projekt</h1>
+    <p>Dieses Projekt wurde als Hobby ins Leben gerufen und basiert auf fiktiven Daten.</p>
+    <p>Für weitere Informationen über mich besuche bitte meine Portfolio-Website.</p>
+    <a href="https://kaplanglobal.de"
+      ><img class="image" src="../assets/image.png" alt="portfolio" srcset=""
+    /></a>
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+.wrapper {
+  width: 90%;
+  min-height: 70vh;
+  margin: auto;
+}
+.image {
+  width: 60%;
+}
+
+@media (max-width: 768px) {
+  .image {
+    width: 100%;
   }
 }
 </style>

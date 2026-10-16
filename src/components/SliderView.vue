@@ -28,7 +28,7 @@ defineProps({
         subtitle: 'Explore the Wild',
         description: 'Discover breathtaking landscapes and untouched wilderness.',
         bgImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920',
-        foregroundImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800',
+        imageUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800',
       },
       {
         id: '2',
@@ -36,7 +36,7 @@ defineProps({
         subtitle: 'Modern Living',
         description: 'Experience the pulse of modern cityscapes and design.',
         bgImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920',
-        foregroundImage: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800',
+        imageUrl: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800',
       },
     ],
   },
@@ -131,7 +131,7 @@ const goToDetail = (bookId) => {
 
           <!-- Image Layer (e.g., opposite side) -->
           <div class="image-wrapper" ref="imageRefs">
-            <img :src="slide.foregroundImage" :alt="slide.title" />
+            <img :src="slide.imageUrl" :alt="slide.title" />
           </div>
         </div>
       </swiper-slide>
@@ -141,7 +141,7 @@ const goToDetail = (bookId) => {
 
 <style scoped>
 .slider-container {
-  width: 70%;
+  width: 100%;
   height: 600px;
   position: relative;
   margin: 1rem auto;
@@ -160,18 +160,16 @@ const goToDetail = (bookId) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 /* Background image layer */
 .slide-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: -36px; /* Extend past the slide edges to hide the blur's transparent fringe. */
   background-size: cover;
   background-position: center;
-  filter: brightness(0.4); /* Darken background for better text contrast */
+  filter: blur(12px) brightness(0.4);
   z-index: 1;
 }
 
