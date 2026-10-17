@@ -84,7 +84,7 @@ const searchStore = useSearchStore()
 .book-info {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  align-items: flex-start;
   gap: 0.4rem;
   min-width: 0;
   overflow-wrap: anywhere;
