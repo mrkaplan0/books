@@ -35,7 +35,7 @@ describe('HeaderView', () => {
     expect(wrapper.findAllComponents(RouterLinkStub).map((link) => link.props('to'))).toEqual([
       '/books',
       '/cart',
-      '/profile',
+      '/about',
     ])
     expect(wrapper.find('.search-bar-item > button').exists()).toBe(false)
   })
